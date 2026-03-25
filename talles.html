@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{margin:0;padding:20px;background:#fff;font-family:'Montserrat',sans-serif}
+.bt{max-width:480px;margin:auto;border:1px solid #d4c4b0;background:#faf8f5;border-radius:4px}
+.bt-hdr{background:#1a1a1a;color:#f5f0e8;padding:1rem;display:flex;justify-content:space-between;cursor:pointer}
+.bt-bdy{display:none;padding:1.2rem}
+.bt-bdy.open{display:block}
+.bt-inp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem}
+.bt-btn{width:100%;padding:.75rem;background:#1a1a1a;color:#fff;border:none;cursor:pointer}
+.bt-res{margin-top:1rem;padding:1rem;border:1px solid #d4c4b0;background:#fff;display:none}
+.bt-res.show{display:block}
+</style>
+</head>
+
+<body>
+
+<div class="bt">
+  <div class="bt-hdr" onclick="toggle()">
+    <span>GUÍA DE TALLES</span>
+    <span id="icon">+</span>
+  </div>
+
+  <div class="bt-bdy" id="body">
+    <p>Medí el contorno de busto y largo.</p>
+
+    <div class="bt-inp">
+      <input type="number" id="c" placeholder="Busto">
+      <input type="number" id="l" placeholder="Largo">
+    </div>
+
+    <button class="bt-btn" onclick="calc()">CALCULAR MI TALLE</button>
+
+    <div class="bt-res" id="res">
+      <h2 id="talle"></h2>
+      <p id="desc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// 🔥 BASE DE PRODUCTOS (EDITÁS SOLO ESTO)
+const data = {
+  "camisa-flor": {t:"M", c:61, l:70},
+  "sweater-nala": {t:"L", c:65, l:72},
+  "jean-isabella": {t:"M", c:70, l:100}
+};
+
+// 🔍 Detecta producto por URL
+const params = new URLSearchParams(window.location.search);
+const prod = params.get("prod");
+
+// fallback
+const item = data[prod] || data["camisa-flor"];
+
+// UI
+function toggle(){
+  document.getElementById("body").classList.toggle("open");
+}
+
+// cálculo
+function calc(){
+  const c = parseFloat(document.getElementById("c").value);
+  const l = parseFloat(document.getElementById("l").value);
+
+  document.getElementById("talle").innerText = item.t;
+  document.getElementById("desc").innerText =
+    "Busto: " + item.c + " cm · Largo: " + item.l + " cm";
+
+  document.getElementById("res").classList.add("show");
+}
+
+</script>
+
+</body>
+</html>
