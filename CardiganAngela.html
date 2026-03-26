@@ -1,0 +1,44 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+.bt{font-family:'Montserrat',sans-serif;max-width:480px;margin:1.5rem auto;border:1px solid #d4c4b0;background:#faf8f5;overflow:hidden;border-radius:4px}
+.bt-hdr{background:#1a1a1a;color:#f5f0e8;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.bt-hdr-t{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.bt-tog{font-size:1.2rem;transition:transform .3s}
+.bt-tog.open{transform:rotate(45deg)}
+.bt-bdy{display:none;padding:1.2rem 1.5rem}
+.bt-bdy.open{display:block}
+.bt-intro{font-size:.72rem;color:#888;margin:0 0 1rem;line-height:1.6}
+.bt-badge{display:inline-block;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;background:#1a1a1a;color:#f5f0e8;padding:.3rem .8rem;border-radius:3px;margin-bottom:.8rem}
+.bt-fit{font-size:.72rem;color:#555;margin:0 0 1.2rem;line-height:1.6;font-style:italic}
+.bt-medidas{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.4rem}
+.bt-card{background:#fff;border:1px solid #d4c4b0;border-radius:3px;padding:.8rem;text-align:center}
+.bt-card-lbl{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600;margin-bottom:.4rem}
+.bt-card-val{font-size:1.6rem;color:#1a1a1a;font-weight:600;line-height:1}
+.bt-card-unit{font-size:.6rem;color:#aaa;margin-top:.2rem}
+</style>
+<div class="bt">
+  <div class="bt-hdr" onclick="bttCardiganÁngela()">
+    <span class="bt-hdr-t">Guía de talles</span>
+    <span class="bt-tog" id="btiCardiganÁngela">+</span>
+  </div>
+  <div class="bt-bdy" id="btbCardiganÁngela">
+    <p class="bt-intro">Te mostramos las medidas reales de la prenda para que puedas elegir con confianza.</p>
+    <div class="bt-badge">Corte: Recto</div>
+    <p class="bt-fit">Caída uniforme y prolija, acompaña el cuerpo sin marcar.</p>
+    <div class="bt-medidas">
+      <div class="bt-card">
+        <div class="bt-card-lbl">Contorno de busto</div>
+        <div class="bt-card-val">54</div>
+        <div class="bt-card-unit">cm</div>
+      </div>
+      <div class="bt-card">
+        <div class="bt-card-lbl">Largo</div>
+        <div class="bt-card-val">60</div>
+        <div class="bt-card-unit">cm</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function bttCardiganÁngela(){var b=document.getElementById('btbCardiganÁngela'),i=document.getElementById('btiCardiganÁngela'),o=b.classList.toggle('open');i.classList.toggle('open',o);}
+</script>
