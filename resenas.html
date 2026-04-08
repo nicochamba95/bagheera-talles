@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reseñas Bagheera</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; font-family: sans-serif; }
+  .ct-wrap { padding: 2rem 1rem 2rem; text-align: center; }
+  .ct-title { font-size: 22px; font-weight: 600; color: #111; margin: 0 0 0.3rem; }
+  .ct-sub { font-size: 14px; color: #999; margin: 0 0 2.5rem; }
+  .ct-images {
+    position: relative; height: 340px;
+    perspective: 1000px; max-width: 480px;
+    margin: 0 auto 2rem;
+  }
+  .ct-img {
+    position: absolute; width: 52%; height: 100%;
+    object-fit: cover; border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+    transition: all 0.7s cubic-bezier(.4,2,.3,1);
+    cursor: pointer; top: 0;
+  }
+  .pos-center { left: 50%; transform: translateX(-50%) scale(1) rotateY(0deg); z-index: 3; opacity: 1; }
+  .pos-left   { left: 0;   transform: translateX(0%) translateY(-28px) scale(0.8) rotateY(18deg); z-index: 2; opacity: 0.72; }
+  .pos-right  { right: 0; left: auto; transform: translateX(0%) translateY(-28px) scale(0.8) rotateY(-18deg); z-index: 2; opacity: 0.72; }
+  .pos-hidden { left: 50%; transform: translateX(-50%) scale(0.4); z-index: 1; opacity: 0; pointer-events: none; }
+  .ct-arrows { display: flex; justify-content: center; gap: 16px; margin-top: 0.5rem; }
+  .ct-btn {
+    width: 48px; height: 48px; border-radius: 50%; border: none;
+    cursor: pointer; font-size: 22px; font-weight: bold;
+    background: #111; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.25s; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .ct-btn:hover { background: #c0a882; }
+</style>
+</head>
+<body>
+<div class="ct-wrap">
+  <p class="ct-title">Lo que dicen nuestras clientas</p>
+  <p class="ct-sub">Reseñas reales por WhatsApp ✓</p>
+  <div class="ct-images" id="ct-images"></div>
+  <div class="ct-arrows">
+    <button class="ct-btn" onclick="ctPrev()">&#8592;</button>
+    <button class="ct-btn" onclick="ctNext()">&#8594;</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var imgs = [
+    "https://res.cloudinary.com/dbupvlknb/image/upload/w_600,q_auto,f_auto/v1775611025/5_aejv29.png",
+    "https://res.cloudinary.com/dbupvlknb/image/upload/w_600,q_auto,f_auto/v1775611025/4_c0i1bk.png",
+    "https://res.cloudinary.com/dbupvlknb/image/upload/w_600,q_auto,f_auto/v1775611024/3_upczbu.png",
+    "https://res.cloudinary.com/dbupvlknb/image/upload/w_600,q_auto,f_auto/v1775611024/1_hzhiex.png",
+    "https://res.cloudinary.com/dbupvlknb/image/upload/w_600,q_auto,f_auto/v1775611025/2_picf3l.png"
+  ];
+  var cur = 0; var n = imgs.length;
+  var container = document.getElementById('ct-images');
+
+  function getPos(i) {
+    var d = (i - cur + n) % n;
+    if (d === 0) return 'pos-center';
+    if (d === n-1) return 'pos-left';
+    if (d === 1) return 'pos-right';
+    return 'pos-hidden';
+  }
+
+  function render() {
+    container.innerHTML = '';
+    imgs.forEach(function(src, i) {
+      var img = document.createElement('img');
+      img.src = src; img.alt = 'Reseña cliente';
+      img.className = 'ct-img ' + getPos(i);
+      img.onclick = (function(idx){ return function(){ cur=idx; render(); }; })(i);
+      container.appendChild(img);
+    });
+  }
+
+  window.ctNext = function(){ cur=(cur+1)%n; render(); };
+  window.ctPrev = function(){ cur=(cur-1+n)%n; render(); };
+
+  render();
+  setInterval(function(){ cur=(cur+1)%n; render(); }, 5000);
+})();
+</script>
+</body>
+</html>
